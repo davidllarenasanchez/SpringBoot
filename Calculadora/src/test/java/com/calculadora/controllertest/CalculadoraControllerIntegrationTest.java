@@ -31,14 +31,25 @@ public class CalculadoraControllerIntegrationTest {
 
     @Test
     public void suma() {
-
+        /* url = "http://localhost:" + port + "/calculadora/multiplica/suma?operador1=<Value1>&operador2=<Value1>"
+              Values tested:  Operador1 = 2  & Operador2 = 2,  Result should be 4.0.
+             */
         ResponseEntity<Double> response = this.restTemplate.getForEntity("http://localhost:" + port + "/calculadora/suma?operador1=2&operador2=2",  Double.class);
         assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
         assertThat(response.getBody(), equalTo(4.0));
 
     }
 
+    @Test
+    public void multiplica() {
+            /* url = "http://localhost:" + port + "/calculadora/multiplica/<Operador1>/<Operador2>"
+              Values tested:  Operador1 = 3  & Operador2 = 3,  Result should be 9.0.
+             */
+        ResponseEntity<Double> response = this.restTemplate.getForEntity("http://localhost:" + port + "/calculadora/multiplica/3/3", Double.class);
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
+        assertThat(response.getBody(), equalTo(9.0));
 
+    }
 
 
 
