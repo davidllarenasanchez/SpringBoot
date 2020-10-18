@@ -17,12 +17,14 @@ public class CalculadoraController {
 
     @GetMapping("/suma")
     public Double suma(@RequestParam("operador1") String value1, @RequestParam("operador2") String value2){
-        return null;
+        Double operador1 = Double.parseDouble(value1);
+        Double operador2 = Double.parseDouble(value2);
+        return calculadoraService.suma(operador1,operador2);
     }
 
     @GetMapping("/multiplica/{operador1}/{operador2}")
     public Double multiplica(@PathVariable Double operador1, @PathVariable Double operador2){
-        return null;
+        return calculadoraService.multiplicar(operador1,operador2);
     }
 
 
