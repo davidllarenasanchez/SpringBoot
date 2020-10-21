@@ -25,4 +25,19 @@ public class CalculadoraService implements ICalculadoraService {
         return resultado;
     }
 
+    @Override
+    public BigDecimal restar(final BigDecimal operador1, final BigDecimal operador2) {
+        BigDecimal resultado = new BigDecimal(0);
+        resultado = operador1.subtract(operador2, MathContext.DECIMAL64);
+        return resultado;
+    }
+
+    @Override
+    public BigDecimal dividir( final BigDecimal  operador1, final BigDecimal  operador2)  {
+        BigDecimal resultado = new BigDecimal(0);
+        resultado = operador1.divide(operador2, MathContext.DECIMAL64);
+        return resultado;
+
+    }
+
 }

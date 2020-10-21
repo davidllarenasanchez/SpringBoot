@@ -16,27 +16,44 @@ public class BasicCalculadoraServiceTest {
 
     private BigDecimal operador1;
     private BigDecimal operador2;
-    private BigDecimal sumaExpectedResult;
-    private BigDecimal multiplicaExpectedResult;
+    private BigDecimal sumarExpectedResult;
+    private BigDecimal multiplicarExpectedResult;
+    private BigDecimal restarExpectedResult;
+    private BigDecimal dividirExpectedResult;
 
 
     @BeforeEach
     private void initOperadores(){
         operador1 = new BigDecimal(2.08758);
         operador2 = new BigDecimal( 4.058956);
-        sumaExpectedResult = operador1.add(operador2,  MathContext.DECIMAL64);
-        multiplicaExpectedResult = operador1.multiply(operador2,  MathContext.DECIMAL64);
+        sumarExpectedResult = operador1.add(operador2,  MathContext.DECIMAL64);
+        multiplicarExpectedResult = operador1.multiply(operador2,  MathContext.DECIMAL64);
+        restarExpectedResult = operador1.subtract(operador2,  MathContext.DECIMAL64);
+        dividirExpectedResult = operador1.divide(operador2,  MathContext.DECIMAL64);
     }
     @Test
     public void testSumar() {
         BigDecimal result = calculadoraService.sumar(operador1,operador2);
-        assertEquals(sumaExpectedResult, result);
+        assertEquals(sumarExpectedResult, result);
     }
 
     @Test
     public void testMultiplicar() {
         BigDecimal result = calculadoraService.multiplicar(operador1,operador2);
-        assertEquals(multiplicaExpectedResult, result);
+        assertEquals(multiplicarExpectedResult, result);
+    }
+
+
+    @Test
+    public void testRestar() {
+        BigDecimal result = calculadoraService.restar(operador1,operador2);
+        assertEquals(restarExpectedResult, result);
+    }
+
+    @Test
+    public void testDividir() {
+        BigDecimal result = calculadoraService.dividir(operador1,operador2);
+        assertEquals(dividirExpectedResult, result);
     }
 
 

@@ -26,6 +26,10 @@ public class CalculadoraController {
         }catch (ArithmeticException aex){
             return resultado;
         }
+        catch (Exception ex){
+            ex.printStackTrace();
+            return resultado;
+        }
     }
 
     @GetMapping("/multiplicar/{operador1}/{operador2}")
@@ -37,9 +41,43 @@ public class CalculadoraController {
         }catch (ArithmeticException aex){
             return resultado;
         }
+        catch (Exception ex){
+            ex.printStackTrace();
+            return resultado;
+        }
+    }
+
+    @GetMapping("/restar/{operador1}/{operador2}")
+    public BigDecimal restar(@PathVariable BigDecimal operador1, @PathVariable BigDecimal operador2){
+        BigDecimal resultado = new BigDecimal(0);
+        try{
+            resultado = calculadoraService.restar(operador1,operador2);
+            return resultado;
+        }catch (ArithmeticException aex){
+            return resultado;
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+            return resultado;
+        }
+
     }
 
 
+    @GetMapping("/dividir/{operador1}/{operador2}")
+    public BigDecimal dividir(@PathVariable BigDecimal operador1, @PathVariable BigDecimal operador2){
+        BigDecimal resultado = new BigDecimal(0);
+        try{
+            resultado = calculadoraService.dividir(operador1,operador2);
+            return resultado;
+        }catch (ArithmeticException aex){
+            return resultado;
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+            return resultado;
+        }
 
+    }
 
 }

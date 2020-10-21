@@ -40,14 +40,24 @@ public class CalculadoraControllerUnitTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andReturn();
-
     }
 
     @Test
-    public void multiplica() throws Exception {
-
+    public void multiplicar() throws Exception {
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/calculadora/multiplicar/0/0")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+
+    }
+
+
+    @Test
+    public void restar() throws Exception {
+
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/calculadora/restar/0/0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -56,7 +66,16 @@ public class CalculadoraControllerUnitTest {
 
     }
 
+    @Test
+    public void dividir() throws Exception {
 
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/calculadora/dividir/0/0")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+
+    }
 
 
 

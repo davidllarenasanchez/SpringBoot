@@ -57,6 +57,28 @@ public class CalculadoraControllerIntegrationTest {
 
     }
 
+    @Test
+    public void restar() {
+        /* url = "http://localhost:" + port + "/calculadora/restar/<Operador1>/<Operador2>"
+         */
+        final BigDecimal expectedResult = operador1.subtract(operador2, MathContext.DECIMAL64);
+        ResponseEntity<BigDecimal> response = this.restTemplate.getForEntity("http://localhost:" + port + "/calculadora/restar/"+operador1+"/"+operador2, BigDecimal.class);
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
+        assertThat(response.getBody(), equalTo(expectedResult));
+
+    }
+
+    @Test
+    public void dividir() {
+        /* url = "http://localhost:" + port + "/calculadora/dividir/<Operador1>/<Operador2>"
+         */
+        final BigDecimal expectedResult = operador1.divide(operador2, MathContext.DECIMAL64);
+        ResponseEntity<BigDecimal> response = this.restTemplate.getForEntity("http://localhost:" + port + "/calculadora/dividir/"+operador1+"/"+operador2, BigDecimal.class);
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
+        assertThat(response.getBody(), equalTo(expectedResult));
+
+    }
+
 
 
 
