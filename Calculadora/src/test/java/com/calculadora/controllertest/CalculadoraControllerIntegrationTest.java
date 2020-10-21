@@ -12,7 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.List;
+import java.math.BigDecimal;
+import java.math.MathContext;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -29,27 +30,33 @@ public class CalculadoraControllerIntegrationTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    private final BigDecimal operador1 =  new BigDecimal(2.65);
+    private final BigDecimal operador2 =  new BigDecimal(5.688987787878745484154181);
+
     @Test
-    public void suma() {
-        /* url = "http://localhost:" + port + "/calculadora/multiplica/suma?operador1=<Value1>&operador2=<Value1>"
-              Values tested:  Operador1 = 2  & Operador2 = 2,  Result should be 4.0.
+    public void sumar() {
+        /* url = "http://localhost:" + port + "/calculadora/multiplica/sumar/<Operador1>/<Operador2>"
              */
-        ResponseEntity<Double> response = this.restTemplate.getForEntity("http://localhost:" + port + "/calculadora/suma?operador1=2&operador2=2",  Double.class);
+        final BigDecimal expectedResult = operador1.add(operador2, MathContext.DECIMAL64);
+        ResponseEntity<BigDecimal> response = this.restTemplate.getForEntity("http://localhost:" + port + "/calculadora/sumar/"+operador1+"/"+operador2,  BigDecimal.class);
         assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
-        assertThat(response.getBody(), equalTo(4.0));
+        assertThat(response.getBody(), equalTo(expectedResult));
 
     }
 
+
     @Test
-    public void multiplica() {
-            /* url = "http://localhost:" + port + "/calculadora/multiplica/<Operador1>/<Operador2>"
-              Values tested:  Operador1 = 3  & Operador2 = 3,  Result should be 9.0.
+    public void multiplicar() {
+            /* url = "http://localhost:" + port + "/calculadora/multiplicar/<Operador1>/<Operador2>"
              */
-        ResponseEntity<Double> response = this.restTemplate.getForEntity("http://localhost:" + port + "/calculadora/multiplica/3/3", Double.class);
+        final BigDecimal expectedResult = operador1.multiply(operador2, MathContext.DECIMAL64);
+
+        ResponseEntity<BigDecimal> response = this.restTemplate.getForEntity("http://localhost:" + port + "/calculadora/multiplicar/"+operador1+"/"+operador2, BigDecimal.class);
         assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
-        assertThat(response.getBody(), equalTo(9.0));
+        assertThat(response.getBody(), equalTo(expectedResult));
 
     }
+
 
 
 

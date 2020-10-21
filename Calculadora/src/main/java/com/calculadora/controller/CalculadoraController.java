@@ -6,6 +6,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+
 @RestController
 @RequestMapping("/calculadora")
 public class CalculadoraController {
@@ -15,17 +17,29 @@ public class CalculadoraController {
     @Autowired
     ICalculadoraService calculadoraService;
 
-    @GetMapping("/suma")
-    public Double suma(@RequestParam("operador1") String value1, @RequestParam("operador2") String value2){
-        Double operador1 = Double.parseDouble(value1);
-        Double operador2 = Double.parseDouble(value2);
-        return calculadoraService.suma(operador1,operador2);
+    @GetMapping("/sumar/{operador1}/{operador2}")
+    public BigDecimal sumar(@PathVariable BigDecimal operador1, @PathVariable BigDecimal operador2){
+        BigDecimal resultado = new BigDecimal(0);
+        try{
+            resultado = calculadoraService.sumar(operador1,operador2);
+            return resultado;
+        }catch (ArithmeticException aex){
+            return resultado;
+        }
     }
 
-    @GetMapping("/multiplica/{operador1}/{operador2}")
-    public Double multiplica(@PathVariable Double operador1, @PathVariable Double operador2){
-        return calculadoraService.multiplicar(operador1,operador2);
+    @GetMapping("/multiplicar/{operador1}/{operador2}")
+    public BigDecimal multiplicar(@PathVariable BigDecimal operador1, @PathVariable BigDecimal operador2){
+        BigDecimal resultado = new BigDecimal(0);
+        try{
+            resultado = calculadoraService.multiplicar(operador1,operador2);
+            return resultado;
+        }catch (ArithmeticException aex){
+            return resultado;
+        }
     }
+
+
 
 
 }

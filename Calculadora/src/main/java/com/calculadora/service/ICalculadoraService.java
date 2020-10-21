@@ -1,7 +1,9 @@
 package com.calculadora.service;
 
+import java.math.BigDecimal;
+
 public interface ICalculadoraService {
 
-     Double  suma(final Double operador1, final Double operador2);
-     Double  multiplicar(final Double operador1, final Double operador2);
+     BigDecimal  sumar(final BigDecimal operador1, final BigDecimal operador2);
+     BigDecimal  multiplicar(final BigDecimal operador1, final BigDecimal operador2);
 }
