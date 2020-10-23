@@ -40,4 +40,23 @@ public class CalculadoraService implements ICalculadoraService {
 
     }
 
+    @Override
+    public BigDecimal calcular(BigDecimal operador1, BigDecimal operador2, String operacion) {
+        BigDecimal resultado = new BigDecimal(0);
+        if(OPERACION_SUMAR.equalsIgnoreCase(operacion)){
+            resultado = this.sumar(operador1,operador2);
+        }
+        if(OPERACION_RESTAR.equalsIgnoreCase(operacion)){
+            resultado = this.restar(operador1,operador2);
+        }
+        if(OPERACION_MULTIPLICAR.equalsIgnoreCase(operacion)){
+            resultado =  this.multiplicar(operador1,operador2);
+        }
+        if(OPERACION_DIVIDIR.equalsIgnoreCase(operacion)){
+            resultado = this.dividir(operador1,operador2);
+        }
+
+        return resultado;
+    }
+
 }

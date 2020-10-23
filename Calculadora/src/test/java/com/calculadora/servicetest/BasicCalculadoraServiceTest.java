@@ -57,5 +57,30 @@ public class BasicCalculadoraServiceTest {
     }
 
 
+    @Test
+    public void testCalcularDividir() {
+        BigDecimal result = calculadoraService.calcular(operador1,operador2,"/");
+        assertEquals(dividirExpectedResult, result);
+    }
+
+    @Test
+    public void testCalcularSumar() {
+        BigDecimal result = calculadoraService.calcular(operador1,operador2,"+");
+        assertEquals(sumarExpectedResult, result);
+    }
+
+    @Test
+    public void testCalcularMultiplicar() {
+        BigDecimal result = calculadoraService.calcular(operador1,operador2,"*");
+        assertEquals(multiplicarExpectedResult, result);
+    }
+
+    @Test
+    public void testCalcularRestar() {
+        BigDecimal result = calculadoraService.calcular(operador1,operador2,"-");
+        assertEquals(restarExpectedResult, result);
+    }
+
+
 
 }
