@@ -119,9 +119,13 @@ public class CalculadoraController implements ICalculadoraController{
     public ResponseEntity<?> calcularEntity(ElementsOperacion elementsOperacion, BindingResult result) {
         BigDecimal resultado = new BigDecimal(0);
         Map<String, Object> response = new HashMap<>();
-
+        if(null == elementsOperacion){
+            log.error("elements operation is null");
+            response.put("mensaje", "Error en los parametros recibidos no deben ser null y los operadores deben ser numéricos");
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+        }
         try {
-            resultado = calculadoraService.calcular(elementsOperacion);
+            calculadoraService.calcular(elementsOperacion);
         }
         catch(ArithmeticException | RestClientException e) {
             log.error(e.getMessage());
@@ -137,6 +141,6 @@ public class CalculadoraController implements ICalculadoraController{
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<BigDecimal>(resultado, HttpStatus.OK);
+        return new ResponseEntity<ElementsOperacion>(elementsOperacion, HttpStatus.OK);
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
+import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.Optional;
 
@@ -25,12 +26,12 @@ public interface ICalculadoraController {
 
 
     @GetMapping("/dividir/{operador1}/{operador2}")
-    public BigDecimal dividir(@PathVariable BigDecimal operador1, @PathVariable BigDecimal operador2);
+    public BigDecimal dividir(@Valid @PathVariable BigDecimal operador1, @PathVariable BigDecimal operador2);
 
     @PostMapping("/calcular")
-    public ResponseEntity<?> calcular(@RequestParam("operador1")Optional<BigDecimal> operador1, @RequestParam("operador2") Optional<BigDecimal> operador2, @RequestParam("operacion") Optional<String> operacion);
+    public ResponseEntity<?> calcular(@Valid @RequestParam("operador1")Optional<BigDecimal> operador1, @Valid @RequestParam("operador2") Optional<BigDecimal> operador2, @Valid @RequestParam("operacion") Optional<String> operacion);
 
     @PostMapping("/calcularEntity")
-    public ResponseEntity<?> calcularEntity(@RequestBody ElementsOperacion elementsOperacion, BindingResult result);
+    public ResponseEntity<?> calcularEntity(@Valid @RequestBody ElementsOperacion elementsOperacion, BindingResult result);
 
 }

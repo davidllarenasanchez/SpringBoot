@@ -61,8 +61,8 @@ public class CalculadoraService implements ICalculadoraService {
     }
 
     @Override
-    public BigDecimal calcular(ElementsOperacion elementsOperacion) {
-        BigDecimal resultado = new BigDecimal(0);
+    public ElementsOperacion calcular(ElementsOperacion elementsOperacion) {
+        BigDecimal resultado = null;
         final String operacion = elementsOperacion.getOperacion();
         if(OPERACION_SUMAR.equalsIgnoreCase(operacion)){
             resultado = this.sumar(elementsOperacion.getOperador1(),elementsOperacion.getOperador2());
@@ -76,7 +76,8 @@ public class CalculadoraService implements ICalculadoraService {
         if(OPERACION_DIVIDIR.equalsIgnoreCase(operacion)){
             resultado = this.dividir(elementsOperacion.getOperador1(),elementsOperacion.getOperador2());
         }
-        return resultado;
+        elementsOperacion.setResultado(resultado);
+        return elementsOperacion;
     }
 
 }

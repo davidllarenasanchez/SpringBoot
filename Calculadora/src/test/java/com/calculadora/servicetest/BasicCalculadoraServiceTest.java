@@ -82,32 +82,32 @@ public class BasicCalculadoraServiceTest {
         assertEquals(restarExpectedResult, result);
     }
 
-    @Test
+   @Test
     public void testCalcularEntityDividir() {
         final ElementsOperacion elementsOperacion = new ElementsOperacion(operador1, operador2,"/");
-        BigDecimal result = calculadoraService.calcular(elementsOperacion);
-        assertEquals(dividirExpectedResult, result);
+       ElementsOperacion result = calculadoraService.calcular(elementsOperacion);
+        assertEquals(dividirExpectedResult, result.getResultado());
     }
 
     @Test
     public void testCalcularEntitySumar() {
         final ElementsOperacion elementsOperacion = new ElementsOperacion(operador1, operador2,"+");
-        BigDecimal result = calculadoraService.calcular(elementsOperacion);
-        assertEquals(sumarExpectedResult, result);
+        ElementsOperacion result = calculadoraService.calcular(elementsOperacion);
+        assertEquals(sumarExpectedResult, result.getResultado());
     }
 
     @Test
     public void testCalcularEntityMultiplicar() {
         final ElementsOperacion elementsOperacion = new ElementsOperacion(operador1, operador2,"*");
-        BigDecimal result = calculadoraService.calcular(elementsOperacion);
-        assertEquals(multiplicarExpectedResult, result);
+        ElementsOperacion result = calculadoraService.calcular(elementsOperacion);
+        assertEquals(multiplicarExpectedResult, result.getResultado());
     }
 
     @Test
     public void testCalcularEntityRestar() {
         final ElementsOperacion elementsOperacion = new ElementsOperacion(operador1, operador2,"-");
-        BigDecimal result = calculadoraService.calcular(elementsOperacion);
-        assertEquals(restarExpectedResult, result);
+        ElementsOperacion result = calculadoraService.calcular(elementsOperacion);
+        assertEquals(restarExpectedResult, result.getResultado());
     }
 
 

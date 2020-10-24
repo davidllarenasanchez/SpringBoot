@@ -90,9 +90,9 @@ public class CalculadoraControllerIntegrationTest {
         final ElementsOperacion elementsOperacion = new ElementsOperacion(operador1, operador2,"+");
 
 
-        ResponseEntity<BigDecimal> response = this.restTemplate.postForEntity("http://localhost:" + port + "/calculadora/calcularEntity", elementsOperacion, BigDecimal.class);
+        ResponseEntity<ElementsOperacion> response = this.restTemplate.postForEntity("http://localhost:" + port + "/calculadora/calcularEntity", elementsOperacion, ElementsOperacion.class);
         assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
-        assertThat(response.getBody(), equalTo(expectedResult));
+        assertThat(((ElementsOperacion)response.getBody()).getResultado(), equalTo(expectedResult));
 
     }
 
@@ -104,9 +104,9 @@ public class CalculadoraControllerIntegrationTest {
         final ElementsOperacion elementsOperacion = new ElementsOperacion(operador1, operador2,"-");
 
 
-        ResponseEntity<BigDecimal> response = this.restTemplate.postForEntity("http://localhost:" + port + "/calculadora/calcularEntity", elementsOperacion, BigDecimal.class);
+        ResponseEntity<ElementsOperacion> response = this.restTemplate.postForEntity("http://localhost:" + port + "/calculadora/calcularEntity", elementsOperacion, ElementsOperacion.class);
         assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
-        assertThat(response.getBody(), equalTo(expectedResult));
+        assertThat(((ElementsOperacion)response.getBody()).getResultado(), equalTo(expectedResult));
 
     }
 
@@ -118,9 +118,9 @@ public class CalculadoraControllerIntegrationTest {
         final ElementsOperacion elementsOperacion = new ElementsOperacion(operador1, operador2,"*");
 
 
-        ResponseEntity<BigDecimal> response = this.restTemplate.postForEntity("http://localhost:" + port + "/calculadora/calcularEntity", elementsOperacion, BigDecimal.class);
+        ResponseEntity<ElementsOperacion> response = this.restTemplate.postForEntity("http://localhost:" + port + "/calculadora/calcularEntity", elementsOperacion, ElementsOperacion.class);
         assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
-        assertThat(response.getBody(), equalTo(expectedResult));
+        assertThat(((ElementsOperacion)response.getBody()).getResultado(), equalTo(expectedResult));
 
     }
 
@@ -132,9 +132,10 @@ public class CalculadoraControllerIntegrationTest {
         final ElementsOperacion elementsOperacion = new ElementsOperacion(operador1, operador2,"/");
 
 
-        ResponseEntity<BigDecimal> response = this.restTemplate.postForEntity("http://localhost:" + port + "/calculadora/calcularEntity", elementsOperacion, BigDecimal.class);
+
+        ResponseEntity<ElementsOperacion> response = this.restTemplate.postForEntity("http://localhost:" + port + "/calculadora/calcularEntity", elementsOperacion, ElementsOperacion.class);
         assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
-        assertThat(response.getBody(), equalTo(expectedResult));
+        assertThat(((ElementsOperacion)response.getBody()).getResultado(), equalTo(expectedResult));
 
     }
 

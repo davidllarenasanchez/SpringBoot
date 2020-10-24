@@ -44,6 +44,16 @@ public class ElementsOperacion implements Serializable {
 
     private String operacion;
 
+    public BigDecimal getResultado() {
+        return resultado;
+    }
+
+    public void setResultado(BigDecimal resultado) {
+        this.resultado = resultado;
+    }
+
+    private BigDecimal resultado;
+
 
 }
 
