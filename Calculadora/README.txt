@@ -27,8 +27,9 @@
 
 
 
-    2 Para ejecutar el jar una vez generado la aplicación. Vamos a la carpeta target donde se encuentra y o bien lo ejecutamos desde ahí o podemos moverlo a otro directorio y ejecutarlo desde
-       el directorio donde lo hemos depositado, y abriendo otra vez el CMD ejecutamos el siguiente comando:
+    2 Para ejecutar el jar una vez generado la aplicación. Vamos a la carpeta target donde se encuentra y o bien lo ejecutamos desde ahí
+        o podemos moverlo a otro directorio y ejecutarlo desde el directorio donde lo hemos depositado, y abriendo otra vez el CMD ejecutamos
+           el siguiente comando:
 
                 •	java -jar calculadora-0.0.1-SNAPSHOT.jar
 
