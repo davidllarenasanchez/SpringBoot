@@ -18,7 +18,8 @@
 2  Ejecución o arrancar el proyecto:
 
     Se puede realizar de dos maneras diferentes:
-     1.-  Llamando a mvn spring-boot:run: lo cual se puede realizar en el entorno de desarrollo, abriendo una ventana  del directorio del proyecto y ejecutamos:
+
+     2.1  Llamando a mvn spring-boot:run: lo cual se puede realizar en el entorno de desarrollo, abriendo una ventana  del directorio del proyecto y ejecutamos:
 
                 •   mvn spring-boot:run
 
@@ -27,7 +28,7 @@
 
 
 
-    2 Para ejecutar el jar una vez generado la aplicación. Vamos a la carpeta target donde se encuentra y o bien lo ejecutamos desde ahí
+    2.2 Para ejecutar el jar una vez generado la aplicación. Vamos a la carpeta target donde se encuentra y o bien lo ejecutamos desde ahí
         o podemos moverlo a otro directorio y ejecutarlo desde el directorio donde lo hemos depositado, y abriendo otra vez el CMD ejecutamos
            el siguiente comando:
 
