@@ -1,6 +1,7 @@
 package com.calculadora.service;
 
 
+import com.calculadora.entity.ElementsOperacion;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -56,6 +57,25 @@ public class CalculadoraService implements ICalculadoraService {
             resultado = this.dividir(operador1,operador2);
         }
 
+        return resultado;
+    }
+
+    @Override
+    public BigDecimal calcular(ElementsOperacion elementsOperacion) {
+        BigDecimal resultado = new BigDecimal(0);
+        final String operacion = elementsOperacion.getOperacion();
+        if(OPERACION_SUMAR.equalsIgnoreCase(operacion)){
+            resultado = this.sumar(elementsOperacion.getOperador1(),elementsOperacion.getOperador2());
+        }
+        if(OPERACION_RESTAR.equalsIgnoreCase(operacion)){
+            resultado = this.restar(elementsOperacion.getOperador1(),elementsOperacion.getOperador2());
+        }
+        if(OPERACION_MULTIPLICAR.equalsIgnoreCase(operacion)){
+            resultado =  this.multiplicar(elementsOperacion.getOperador1(),elementsOperacion.getOperador2());
+        }
+        if(OPERACION_DIVIDIR.equalsIgnoreCase(operacion)){
+            resultado = this.dividir(elementsOperacion.getOperador1(),elementsOperacion.getOperador2());
+        }
         return resultado;
     }
 

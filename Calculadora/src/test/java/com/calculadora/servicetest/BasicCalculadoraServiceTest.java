@@ -1,5 +1,6 @@
 package com.calculadora.servicetest;
 
+import com.calculadora.entity.ElementsOperacion;
 import com.calculadora.service.CalculadoraService;
 import com.calculadora.service.ICalculadoraService;
 import org.junit.jupiter.api.BeforeEach;
@@ -78,6 +79,34 @@ public class BasicCalculadoraServiceTest {
     @Test
     public void testCalcularRestar() {
         BigDecimal result = calculadoraService.calcular(operador1,operador2,"-");
+        assertEquals(restarExpectedResult, result);
+    }
+
+    @Test
+    public void testCalcularEntityDividir() {
+        final ElementsOperacion elementsOperacion = new ElementsOperacion(operador1, operador2,"/");
+        BigDecimal result = calculadoraService.calcular(elementsOperacion);
+        assertEquals(dividirExpectedResult, result);
+    }
+
+    @Test
+    public void testCalcularEntitySumar() {
+        final ElementsOperacion elementsOperacion = new ElementsOperacion(operador1, operador2,"+");
+        BigDecimal result = calculadoraService.calcular(elementsOperacion);
+        assertEquals(sumarExpectedResult, result);
+    }
+
+    @Test
+    public void testCalcularEntityMultiplicar() {
+        final ElementsOperacion elementsOperacion = new ElementsOperacion(operador1, operador2,"*");
+        BigDecimal result = calculadoraService.calcular(elementsOperacion);
+        assertEquals(multiplicarExpectedResult, result);
+    }
+
+    @Test
+    public void testCalcularEntityRestar() {
+        final ElementsOperacion elementsOperacion = new ElementsOperacion(operador1, operador2,"-");
+        BigDecimal result = calculadoraService.calcular(elementsOperacion);
         assertEquals(restarExpectedResult, result);
     }
 

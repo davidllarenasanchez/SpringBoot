@@ -1,6 +1,7 @@
 package com.calculadora.controllertest;
 
 
+import com.calculadora.entity.ElementsOperacion;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,8 @@ public class CalculadoraControllerIntegrationTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
+
+
 
     private final BigDecimal operador1 =  new BigDecimal(2.65);
     private final BigDecimal operador2 =  new BigDecimal(5.688987787878745484154181);
@@ -79,7 +82,60 @@ public class CalculadoraControllerIntegrationTest {
 
     }
 
+    @Test
+    public void calcularEntitySumar()  {
+        /* url = "http://localhost:" + port + "/calculadora/calcularEntity" */
+
+        final BigDecimal expectedResult = operador1.add(operador2, MathContext.DECIMAL64);
+        final ElementsOperacion elementsOperacion = new ElementsOperacion(operador1, operador2,"+");
 
 
+        ResponseEntity<BigDecimal> response = this.restTemplate.postForEntity("http://localhost:" + port + "/calculadora/calcularEntity", elementsOperacion, BigDecimal.class);
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
+        assertThat(response.getBody(), equalTo(expectedResult));
+
+    }
+
+    @Test
+    public void calcularEntityRestar()  {
+        /* url = "http://localhost:" + port + "/calculadora/calcularEntity" */
+
+        final BigDecimal expectedResult = operador1.subtract(operador2, MathContext.DECIMAL64);
+        final ElementsOperacion elementsOperacion = new ElementsOperacion(operador1, operador2,"-");
+
+
+        ResponseEntity<BigDecimal> response = this.restTemplate.postForEntity("http://localhost:" + port + "/calculadora/calcularEntity", elementsOperacion, BigDecimal.class);
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
+        assertThat(response.getBody(), equalTo(expectedResult));
+
+    }
+
+    @Test
+    public void calcularEntityMultiplicar()  {
+        /* url = "http://localhost:" + port + "/calculadora/calcularEntity" */
+
+        final BigDecimal expectedResult = operador1.multiply(operador2, MathContext.DECIMAL64);
+        final ElementsOperacion elementsOperacion = new ElementsOperacion(operador1, operador2,"*");
+
+
+        ResponseEntity<BigDecimal> response = this.restTemplate.postForEntity("http://localhost:" + port + "/calculadora/calcularEntity", elementsOperacion, BigDecimal.class);
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
+        assertThat(response.getBody(), equalTo(expectedResult));
+
+    }
+
+    @Test
+    public void calcularEntityDividir()  {
+        /* url = "http://localhost:" + port + "/calculadora/calcularEntity" */
+
+        final BigDecimal expectedResult = operador1.divide(operador2, MathContext.DECIMAL64);
+        final ElementsOperacion elementsOperacion = new ElementsOperacion(operador1, operador2,"/");
+
+
+        ResponseEntity<BigDecimal> response = this.restTemplate.postForEntity("http://localhost:" + port + "/calculadora/calcularEntity", elementsOperacion, BigDecimal.class);
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
+        assertThat(response.getBody(), equalTo(expectedResult));
+
+    }
 
 }
