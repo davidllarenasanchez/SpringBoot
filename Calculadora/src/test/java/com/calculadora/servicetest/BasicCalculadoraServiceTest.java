@@ -1,6 +1,7 @@
 package com.calculadora.servicetest;
 
 import com.calculadora.entity.ElementsOperacion;
+import com.calculadora.entity.ElementsOperacionDouble;
 import com.calculadora.service.CalculadoraService;
 import com.calculadora.service.ICalculadoraService;
 import org.junit.jupiter.api.BeforeEach;
@@ -110,6 +111,34 @@ public class BasicCalculadoraServiceTest {
         assertEquals(restarExpectedResult, result.getResultado());
     }
 
+
+    @Test
+    public void testCalcularEntityDoubleDividir() {
+        final ElementsOperacionDouble elementsOperacion = new ElementsOperacionDouble(10d, 5d,"/");
+        calculadoraService.calcularDouble(elementsOperacion);
+        assertEquals(2d, elementsOperacion.getResultado());
+    }
+
+    @Test
+    public void testCalcularEntityDoubleSumar() {
+        final ElementsOperacionDouble elementsOperacion = new ElementsOperacionDouble(10d, 2d,"+");
+        calculadoraService.calcularDouble(elementsOperacion);
+        assertEquals(12d, elementsOperacion.getResultado());
+    }
+
+    @Test
+    public void testCalcularEntityDoubleMultiplicar() {
+        final ElementsOperacionDouble elementsOperacion = new ElementsOperacionDouble(5d, 5d,"*");
+        calculadoraService.calcularDouble(elementsOperacion);
+        assertEquals(25d, elementsOperacion.getResultado());
+    }
+
+    @Test
+    public void testCalcularEntityDoubleRestar() {
+        final ElementsOperacionDouble elementsOperacion = new ElementsOperacionDouble(25d, 25.5d,"-");
+        calculadoraService.calcularDouble(elementsOperacion);
+        assertEquals(-0.5, elementsOperacion.getResultado());
+    }
 
 
 }

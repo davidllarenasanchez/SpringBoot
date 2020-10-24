@@ -1,6 +1,7 @@
 package com.calculadora.controller;
 
 import com.calculadora.entity.ElementsOperacion;
+import com.calculadora.entity.ElementsOperacionDouble;
 import com.calculadora.service.ICalculadoraService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,8 @@ import java.util.Optional;
 public class CalculadoraController implements ICalculadoraController{
 
     private final Logger log =LoggerFactory.getLogger(this.getClass());
+
+    Map<String, Object> response = new HashMap<>();
 
 
 
@@ -91,8 +94,7 @@ public class CalculadoraController implements ICalculadoraController{
 
     @Override
     public ResponseEntity<?> calcular(Optional<BigDecimal> operador1, Optional<BigDecimal> operador2, Optional<String> operacion) {
-        BigDecimal resultado = new BigDecimal(0);
-        Map<String, Object> response = new HashMap<>();
+        BigDecimal resultado = new BigDecimal(0);;
 
         try {
             resultado = calculadoraService.calcular(operador1.get(),operador2.get(), operacion.get());
@@ -117,8 +119,8 @@ public class CalculadoraController implements ICalculadoraController{
 
     @Override
     public ResponseEntity<?> calcularEntity(ElementsOperacion elementsOperacion, BindingResult result) {
-        BigDecimal resultado = new BigDecimal(0);
-        Map<String, Object> response = new HashMap<>();
+
+
         if(null == elementsOperacion){
             log.error("elements operation is null");
             response.put("mensaje", "Error en los parametros recibidos no deben ser null y los operadores deben ser numéricos");
@@ -142,5 +144,33 @@ public class CalculadoraController implements ICalculadoraController{
         }
 
         return new ResponseEntity<ElementsOperacion>(elementsOperacion, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<?> calcularEntityDouble(ElementsOperacionDouble elementsOperacionDouble, BindingResult result) {
+
+        if(null == elementsOperacionDouble){
+            log.error("elements operation is null");
+            response.put("mensaje", "Error en los parametros recibidos no deben ser null y los operadores deben ser numéricos");
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+        }
+        try {
+            calculadoraService.calcularDouble(elementsOperacionDouble);
+        }
+        catch(ArithmeticException | RestClientException e) {
+            log.error(e.getMessage());
+            response.put("mensaje", "Error en los parametros recibidos no deben ser null y los operadores deben ser numéricos");
+            response.put("error", e.getMessage());
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+
+        }
+        catch (Exception ex){
+            log.error(ex.getMessage());
+            response.put("mensaje", "Error en los parametros recibidos no deben ser null y los operadores deben ser numéricos");
+            response.put("error", ex.getMessage());
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<ElementsOperacionDouble>(elementsOperacionDouble, HttpStatus.OK);
     }
 }

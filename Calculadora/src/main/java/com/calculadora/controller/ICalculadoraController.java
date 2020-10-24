@@ -1,6 +1,7 @@
 package com.calculadora.controller;
 
 import com.calculadora.entity.ElementsOperacion;
+import com.calculadora.entity.ElementsOperacionDouble;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.BindingResult;
@@ -33,5 +34,8 @@ public interface ICalculadoraController {
 
     @PostMapping("/calcularEntity")
     public ResponseEntity<?> calcularEntity(@Valid @RequestBody ElementsOperacion elementsOperacion, BindingResult result);
+
+    @PostMapping("/calcularEntityDouble")
+    public ResponseEntity<?> calcularEntityDouble(@Valid @RequestBody ElementsOperacionDouble elementsOperacion, BindingResult result);
 
 }

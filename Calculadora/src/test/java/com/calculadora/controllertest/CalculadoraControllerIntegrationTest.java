@@ -2,6 +2,7 @@ package com.calculadora.controllertest;
 
 
 import com.calculadora.entity.ElementsOperacion;
+import com.calculadora.entity.ElementsOperacionDouble;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
+import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -136,6 +138,37 @@ public class CalculadoraControllerIntegrationTest {
         ResponseEntity<ElementsOperacion> response = this.restTemplate.postForEntity("http://localhost:" + port + "/calculadora/calcularEntity", elementsOperacion, ElementsOperacion.class);
         assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
         assertThat(((ElementsOperacion)response.getBody()).getResultado(), equalTo(expectedResult));
+
+    }
+
+
+    @Test
+    public void calcularEntityDoubleDividir()  {
+        /* url = "http://localhost:" + port + "/calculadora/calcularEntity" */
+
+        final BigDecimal expectedResult = operador1.divide(operador2, MathContext.DECIMAL64);
+        final ElementsOperacionDouble elementsOperacion = new ElementsOperacionDouble(operador1.doubleValue(), operador2.doubleValue(),"/");
+
+
+
+        ResponseEntity<ElementsOperacionDouble> response = this.restTemplate.postForEntity("http://localhost:" + port + "/calculadora/calcularEntity", elementsOperacion, ElementsOperacionDouble.class);
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
+
+
+    }
+
+    @Test
+    public void calcularEntityDoubleDividirNullOperator1()  {
+        /* url = "http://localhost:" + port + "/calculadora/calcularEntity" */
+
+        final BigDecimal expectedResult = operador1.divide(operador2, MathContext.DECIMAL64);
+        final ElementsOperacionDouble elementsOperacion = new ElementsOperacionDouble(null, operador2.doubleValue(),"/");
+
+
+
+        ResponseEntity<ElementsOperacionDouble> response = this.restTemplate.postForEntity("http://localhost:" + port + "/calculadora/calcularEntity", elementsOperacion, ElementsOperacionDouble.class);
+        assertThat(response.getStatusCode(), equalTo(HttpStatus.BAD_REQUEST));
+
 
     }
 

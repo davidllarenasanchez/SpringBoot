@@ -1,6 +1,7 @@
 package com.calculadora.service;
 
 import com.calculadora.entity.ElementsOperacion;
+import com.calculadora.entity.ElementsOperacionDouble;
 
 import java.math.BigDecimal;
 
@@ -17,4 +18,5 @@ public interface ICalculadoraService {
      BigDecimal dividir( final BigDecimal  operador1, final BigDecimal  operador2);
      BigDecimal calcular( final BigDecimal  operador1, final BigDecimal  operador2, final String operacion);
      ElementsOperacion calcular(final ElementsOperacion elementsOperacion);
+     void calcularDouble(final ElementsOperacionDouble elementsOperacion);
 }
