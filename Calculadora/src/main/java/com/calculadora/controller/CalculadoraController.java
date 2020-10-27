@@ -30,7 +30,9 @@ public class CalculadoraController implements ICalculadoraController{
     @Autowired
     ICalculadoraService calculadoraService;
 
-
+    /** Metodos sumar, restar, multiplicar, dividir Start end-points sencillos: un metodo de tipo get por cada operación devolviendo nulo en los casos que
+      se de alguna excepcion
+     */
     @Override
     public BigDecimal multiplicar(BigDecimal operador1, BigDecimal operador2) {
 
@@ -92,9 +94,19 @@ public class CalculadoraController implements ICalculadoraController{
         }
     }
 
+    /* Final end-points sencillos: un metodo de tipo get por cada operación devolviendo nulo en los casos que
+      se de alguna excepcion
+     */
+
+    /** Calcular un metodo de tipo post que recibe los operandos de tipo BigDecimal y el tipo de operación +,*,-, /
+        Devuelve un ResponseEntity
+        tiene controles para que en caso de una excepción en alguna de las operaciones o si la entidad recibida es nula
+         Devoviendo en este caso  un mensaje de error y un HttpStatus.BAD_REQUEST
+     */
+
     @Override
     public ResponseEntity<?> calcular(Optional<BigDecimal> operador1, Optional<BigDecimal> operador2, Optional<String> operacion) {
-        BigDecimal resultado = new BigDecimal(0);;
+        BigDecimal resultado = null;
 
         try {
             resultado = calculadoraService.calcular(operador1.get(),operador2.get(), operacion.get());
@@ -113,19 +125,31 @@ public class CalculadoraController implements ICalculadoraController{
                 return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
         }
 
+        if(null == resultado){
+            log.error("elements operation is null");
+            response.put("mensaje", "Error en los parametros recibidos no deben ser null y los operadores deben ser numéricos");
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+        }
+
         return new ResponseEntity<BigDecimal>(resultado, HttpStatus.OK);
 
     }
+    /* Final end-point: un metodo de tipo post que recibe los operandos de tipo BigDecimal y el tipo de operación +,*,-, /
+     */
+
+
+    /** calcularEntity:   un metodo de tipo post que recibe una entidad cuyos miembros son los operandos de tipo BigDecimal y el tipo de operación +,*,-, /
+        Devuelve un ResponseEntity
+        tiene controles para que en caso de una excepción en alguna de las operaciones o si la entidad recibida es nula
+         Devoviendo en este caso  un mensaje de error y un HttpStatus.BAD_REQUEST
+
+         En caso de que la operacion sea correcta devuelve un ReponseEntity con el resultado y  HttpStatus.OK
+     */
 
     @Override
     public ResponseEntity<?> calcularEntity(ElementsOperacion elementsOperacion, BindingResult result) {
 
 
-        if(null == elementsOperacion){
-            log.error("elements operation is null");
-            response.put("mensaje", "Error en los parametros recibidos no deben ser null y los operadores deben ser numéricos");
-            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
-        }
         try {
             calculadoraService.calcular(elementsOperacion);
         }
@@ -143,17 +167,31 @@ public class CalculadoraController implements ICalculadoraController{
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<ElementsOperacion>(elementsOperacion, HttpStatus.OK);
-    }
-
-    @Override
-    public ResponseEntity<?> calcularEntityDouble(ElementsOperacionDouble elementsOperacionDouble, BindingResult result) {
-
-        if(null == elementsOperacionDouble){
+        if(null == elementsOperacion.getResultado()){
             log.error("elements operation is null");
             response.put("mensaje", "Error en los parametros recibidos no deben ser null y los operadores deben ser numéricos");
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
         }
+
+        return new ResponseEntity<ElementsOperacion>(elementsOperacion, HttpStatus.OK);
+    }
+
+    /* Final end-point: un metodo de tipo post que recibe una entidad cuyos miembros son los operandos de tipo BigDecimal y el tipo de operación +,*,-, /
+    */
+
+
+     /** calcularEntityDouble: Start end-point: un metodo de tipo post que recibe una entidad cuyos miembros son los operandos de tipo Double y el tipo de operación +,*,-, /
+        Devuelve un ResponseEntity
+        tiene controles para que en caso de una excepción en alguna de las operaciones o si la entidad recibida es nula
+         Devoviendo en este caso  un mensaje de error y un HttpStatus.BAD_REQUEST
+
+         En caso de que la operacion sea correcta devuelve un ReponseEntity con el resultado y  HttpStatus.OK
+     */
+
+    @Override
+    public ResponseEntity<?> calcularEntityDouble(ElementsOperacionDouble elementsOperacionDouble, BindingResult result) {
+
+
         try {
             calculadoraService.calcularDouble(elementsOperacionDouble);
         }
@@ -170,7 +208,15 @@ public class CalculadoraController implements ICalculadoraController{
             response.put("error", ex.getMessage());
             return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
         }
+        if(null == elementsOperacionDouble.getResultado()){
+            log.error("elements operation is null");
+            response.put("mensaje", "Error en los parametros recibidos no deben ser null y los operadores deben ser numéricos");
+            return new ResponseEntity<Map<String, Object>>(response, HttpStatus.BAD_REQUEST);
+        }
 
         return new ResponseEntity<ElementsOperacionDouble>(elementsOperacionDouble, HttpStatus.OK);
     }
+
+    /* Final end-point: un metodo de tipo post que recibe una entidad cuyos miembros son los operandos de tipo Double y el tipo de operación +,*,-, /
+     */
 }

@@ -44,7 +44,7 @@ public class CalculadoraService implements ICalculadoraService {
 
     @Override
     public BigDecimal calcular(BigDecimal operador1, BigDecimal operador2, String operacion) {
-        BigDecimal resultado = new BigDecimal(0);
+        BigDecimal resultado = null;
         if(OPERACION_SUMAR.equalsIgnoreCase(operacion)){
             resultado = this.sumar(operador1,operador2);
         }

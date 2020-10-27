@@ -1,11 +1,15 @@
 package com.calculadora.entity;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 
 public class ElementsOperacionDouble implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    public ElementsOperacionDouble(){ super();}
 
     public ElementsOperacionDouble(Double operador1, Double operador2, String operacion) {
         super();
@@ -13,8 +17,17 @@ public class ElementsOperacionDouble implements Serializable {
         this.operador2 = operador2;
         this.operacion = operacion;
     }
-
+    @NotNull(message ="no puede estar vacio")
     private Double operador1;
+
+    @NotNull(message ="no puede estar vacio")
+    private Double operador2;
+
+    @NotEmpty(message ="no puede estar vacio")
+    private String operacion;
+
+
+    private Double resultado;
 
     public Double getOperador1() {
         return operador1;
@@ -32,7 +45,6 @@ public class ElementsOperacionDouble implements Serializable {
         this.operador2 = operador2;
     }
 
-    private Double operador2;
 
     public String getOperacion() {
         return operacion;
@@ -42,7 +54,7 @@ public class ElementsOperacionDouble implements Serializable {
         this.operacion = operacion;
     }
 
-    private String operacion;
+
 
     public Double getResultado() {
         return resultado;
@@ -52,7 +64,7 @@ public class ElementsOperacionDouble implements Serializable {
         this.resultado = resultado;
     }
 
-    private Double resultado;
+
 
 
 }

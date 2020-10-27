@@ -1,5 +1,8 @@
 package com.calculadora.entity;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -13,8 +16,16 @@ public class ElementsOperacion implements Serializable {
         this.operador2 = operador2;
         this.operacion = operacion;
     }
-
+    @NotNull(message ="no puede estar vacio")
     private BigDecimal operador1;
+
+    @NotNull(message ="no puede estar vacio")
+    private BigDecimal operador2;
+
+    @NotEmpty(message ="no puede estar vacio")
+    private String operacion;
+
+    private BigDecimal resultado;
 
     public BigDecimal getOperador1() {
         return operador1;
@@ -32,7 +43,7 @@ public class ElementsOperacion implements Serializable {
         this.operador2 = operador2;
     }
 
-    private BigDecimal operador2;
+
 
     public String getOperacion() {
         return operacion;
@@ -42,7 +53,7 @@ public class ElementsOperacion implements Serializable {
         this.operacion = operacion;
     }
 
-    private String operacion;
+
 
     public BigDecimal getResultado() {
         return resultado;
@@ -52,7 +63,7 @@ public class ElementsOperacion implements Serializable {
         this.resultado = resultado;
     }
 
-    private BigDecimal resultado;
+
 
 
 }
